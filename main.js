@@ -133,7 +133,8 @@ function runSplash(deltaTime) {
 
 var splashTwo = document.createElement("img");
 splashTwo.src = "splashtwo.png"
-
+var riddleOne = document.createElement("img");
+riddleOne.src = "riddle1.png"
 var splashTimerTwo = 500;
 function runGameOver(deltaTime) {
     splashTimerTwo -= deltaTime;
@@ -152,12 +153,30 @@ function runGameOver(deltaTime) {
     }
     musicBackground.stop();
 }
+function runGameRiddle(deltaTime) {
+    splashTimerTwo -= deltaTime;
+
+    context.drawImage(riddleOne, 0, 0, canvas.width, canvas.height);
+    
+    if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
+        gameState = runGameOver;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
+        gameState = runGameWin;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
+        gameState = runGameOver;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_D) == true) {
+        gameState = runGameOver;
+    }
+    musicBackground.stop();
+}
 function runGameWin(deltaTime) {
     splashTimerTwo -= deltaTime;
 
     context.drawImage(youWin, 0, 0, canvas.width, canvas.height);
-    
-    musicBackground.stop();
+
 }
 function cellAtPixelCoord(layer, x, y) {
     if (x < 0 || x > SCREEN_WIDTH || y<0)
@@ -281,7 +300,7 @@ function initialize() {
             buffer: true,
             volume: 0.5
         });
-    musicBackground.play();
+    //musicBackground.play();
 
     sfxFire = new Howl(
         {
@@ -434,6 +453,9 @@ function run() {
             break;
         case STATE_GAMEWIN:
             runGameWin(deltaTime);
+            break;
+        case STATE_GAMERIDDLE:
+            runGameRiddle(deltaTime);
             break;
     }
 
