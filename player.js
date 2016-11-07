@@ -231,7 +231,7 @@ Player.prototype.update = function (deltaTime) {
     if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
         gameState = STATE_GAMEOVER;
     }
-    if (keyboard.isKeyDown(keyboard.KEY_B) == true) && if (keyboard.isKeyUp(keyboard.KEY_A) == true) {
+    if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
         gameState = STATE_GAMEWIN;
     }
     if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
