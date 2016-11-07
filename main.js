@@ -163,6 +163,18 @@ function runGameOver(deltaTime) {
     musicBackground.stop();
 }
 function runGameRiddle(deltaTime) {
+    if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
+        gameState = STATE_GAMEOVER;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
+        gameState = STATE_GAMEWIN;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
+        gameState = STATE_GAMEOVER;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_D) == true) {
+        gameState = STATE_GAMEOVER;
+    }
     splashTimerTwo -= deltaTime;
 
     context.drawImage(riddle1, 0, 0, canvas.width, canvas.height);
@@ -354,12 +366,8 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     }
     return true;
 }
-function run() {
-   
-    context.fillStyle = "#ccc";
-    context.fillRect(0, 0, canvas.width, canvas.height);
+function runGame(deltaTime){
 
-    var deltaTime = getDeltaTime();
 
     drawMap();
     player.update(deltaTime);
@@ -432,7 +440,14 @@ function run() {
         context.drawImage(heartImage, 60 + ((heartImage.width + 20) * i), 10, 30, 30);
       
     }
-    // update the frame counter 
+   
+}
+function run() {
+   context.fillStyle = "#ccc";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    var deltaTime = getDeltaTime();
+     // update the frame counter 
     fpsTime += deltaTime;
     fpsCount++;
     if (fpsTime >= 1) {
@@ -459,10 +474,13 @@ function run() {
         case STATE_GAMERIDDLE:
             runGameRiddle(deltaTime);
             break;
+        case STATE_GAME:
+        runGame(deltaTime);
+            break;
     }
-
-    
 }
+    
+
 
 initialize();
 
