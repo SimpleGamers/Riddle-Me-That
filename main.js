@@ -29,8 +29,8 @@ function getDeltaTime() {
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
-var STATE_GAMEWIN = 3;
-
+var STATE_GAMEWIN = 4;
+var STATE_GAMERIDDLE = 3;
 var timer = 120;
 
 var gameState = STATE_SPLASH;
@@ -157,7 +157,7 @@ function runGameRiddle(deltaTime) {
     splashTimerTwo -= deltaTime;
 
     context.drawImage(riddleOne, 0, 0, canvas.width, canvas.height);
-    
+
     if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
         gameState = runGameOver;
     }
@@ -171,13 +171,13 @@ function runGameRiddle(deltaTime) {
         gameState = runGameOver;
     }
     musicBackground.stop();
-}
+};
 function runGameWin(deltaTime) {
     splashTimerTwo -= deltaTime;
 
     context.drawImage(youWin, 0, 0, canvas.width, canvas.height);
 
-}
+};
 function cellAtPixelCoord(layer, x, y) {
     if (x < 0 || x > SCREEN_WIDTH || y<0)
         return 1;
@@ -451,12 +451,13 @@ function run() {
         case STATE_GAMEOVER:
             runGameOver(deltaTime);
             break;
-        case STATE_GAMEWIN:
-            runGameWin(deltaTime);
-            break;
         case STATE_GAMERIDDLE:
             runGameRiddle(deltaTime);
             break;
+        case STATE_GAMEWIN:
+            runGameWin(deltaTime);
+            break;
+        
     }
 
     
