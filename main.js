@@ -72,6 +72,12 @@ var JUMP = METER * 1500
 
 
 
+  // draw all the bullets
+        for (var i = 0; i < bullets.length; i++) {
+            context.drawImage(bullets[i].image,
+                bullets[i].x - bullets[i].width / 2,
+                bullets[i].y - bullets[i].height / 2);
+        }
 // load an image to draw
 var chuckNorris = document.createElement("img");
 chuckNorris.src = "hero.png";
