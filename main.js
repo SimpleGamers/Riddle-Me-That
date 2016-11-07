@@ -3,6 +3,7 @@ var context = canvas.getContext("2d");
 
 var startFrameMillis = Date.now();
 var endFrameMillis = Date.now();
+var bullets = [];
 
 // This function will return the time in seconds since the function 
 // was last called
@@ -29,8 +30,8 @@ function getDeltaTime() {
 var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
-var STATE_GAMEWIN = 4;
-var STATE_GAMERIDDLE = 3;
+var STATE_GAMEWIN = 3;
+
 var timer = 120;
 
 var gameState = STATE_SPLASH;
@@ -74,7 +75,8 @@ var JUMP = METER * 1500
 // load an image to draw
 var chuckNorris = document.createElement("img");
 chuckNorris.src = "hero.png";
-
+var riddle1 = document.createElement("img");
+riddle1.src = "riddle1.png"
 
 var keyboard = new Keyboard();
 
@@ -133,8 +135,7 @@ function runSplash(deltaTime) {
 
 var splashTwo = document.createElement("img");
 splashTwo.src = "splashtwo.png"
-var riddleOne = document.createElement("img");
-riddleOne.src = "riddle1.png"
+
 var splashTimerTwo = 500;
 function runGameOver(deltaTime) {
     splashTimerTwo -= deltaTime;
@@ -153,31 +154,13 @@ function runGameOver(deltaTime) {
     }
     musicBackground.stop();
 }
-function runGameRiddle(deltaTime) {
-    splashTimerTwo -= deltaTime;
-
-    context.drawImage(riddleOne, 0, 0, canvas.width, canvas.height);
-
-    if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
-        gameState = runGameOver;
-    }
-    if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
-        gameState = runGameWin;
-    }
-    if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
-        gameState = runGameOver;
-    }
-    if (keyboard.isKeyDown(keyboard.KEY_D) == true) {
-        gameState = runGameOver;
-    }
-    musicBackground.stop();
-};
 function runGameWin(deltaTime) {
     splashTimerTwo -= deltaTime;
 
-    context.drawImage(youWin, 0, 0, canvas.width, canvas.height);
-
-};
+    context.drawImage(riddle1, 0, 0, canvas.width, canvas.height);
+    
+    musicBackground.stop();
+}
 function cellAtPixelCoord(layer, x, y) {
     if (x < 0 || x > SCREEN_WIDTH || y<0)
         return 1;
@@ -300,7 +283,7 @@ function initialize() {
             buffer: true,
             volume: 0.5
         });
-    //musicBackground.play();
+    musicBackground.play();
 
     sfxFire = new Howl(
         {
@@ -355,6 +338,7 @@ function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
     return true;
 }
 function run() {
+   
     context.fillStyle = "#ccc";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -405,6 +389,7 @@ function run() {
         }
     }
     
+    
 
     context.fillStyle = "blue";
     context.font = "32px Arial";
@@ -451,13 +436,9 @@ function run() {
         case STATE_GAMEOVER:
             runGameOver(deltaTime);
             break;
-        case STATE_GAMERIDDLE:
-            runGameRiddle(deltaTime);
-            break;
         case STATE_GAMEWIN:
             runGameWin(deltaTime);
             break;
-        
     }
 
     

@@ -48,8 +48,24 @@ var Player = function () {
 
 };
 
+ function playerShoot() {
+    var bullet = {
+        image: document.createElement("img"),
+        x: player.x,
+        y: player.y,
+        width: 5,
+        height: 5,
+        velocityX: 0,
+        velocityY: 0
+    };
+    bullet.image.src = "bullet.png";
 
-
+    var xVel = 1;
+    var yVel = 0;
+    var BULLET_SPEED = 2;
+    bullet.velocityX = xVel * BULLET_SPEED;
+    bullet.velocityY = yVel * BULLET_SPEED;
+ }
 Player.prototype.update = function (deltaTime) {
     
     this.sprite.update(deltaTime);
@@ -74,6 +90,7 @@ Player.prototype.update = function (deltaTime) {
         this.cooldownTimer -= deltaTime;
     }
     if (keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <= 0) {
+             playerShoot();
         sfxFire.play();
         this.cooldownTimer = 0.3;
     }
@@ -209,18 +226,7 @@ Player.prototype.update = function (deltaTime) {
         }
     }
     if (cellAtTileCoord(LAYER_OBJECT_TRIGGERS, tx, ty) == true) {
-        gameState = STATE_GAMERIDDLE;
-        if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
-            gameState = STATE_GAMEOVER;
-        }
-        if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
-            gameState = STATE_GAMEWIN;
-        }
-        if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
-            gameState = STATE_GAMEOVER;
-        }
-        if (keyboard.isKeyDown(keyboard.KEY_D) == true) {
-            gameState = STATE_GAMEOVER;
+        gameState = STATE_GAMEWIN;
     }
 }
 
