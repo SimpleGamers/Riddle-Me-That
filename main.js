@@ -38,6 +38,7 @@ var timer = 120;
 var gameState = STATE_SPLASH;
 
 var splashTimer = 4;
+var winTimer = 4;
 //-------------------- Don't modify anything above here
 
 var SCREEN_WIDTH = canvas.width;
@@ -168,8 +169,12 @@ function runGameRiddle(deltaTime) {
     musicBackground.stop();
 }
 function runGameWin(deltaTime) {
-    splashTimerTwo -= deltaTime;
+    winTimer -= deltaTime;
 
+    if (winTimer <= 0) {
+        document.location.reload();
+        return;
+    }
     context.drawImage(youWin, 0, 0, canvas.width, canvas.height);
     musicBackground.stop();
 }
