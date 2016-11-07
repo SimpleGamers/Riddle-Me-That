@@ -31,6 +31,7 @@ var STATE_SPLASH = 0;
 var STATE_GAME = 1;
 var STATE_GAMEOVER = 2;
 var STATE_GAMEWIN = 3;
+var STATE_GAMERIDDLE = 4;
 
 var timer = 120;
 
@@ -160,11 +161,16 @@ function runGameOver(deltaTime) {
     }
     musicBackground.stop();
 }
-function runGameWin(deltaTime) {
+function runGameRiddle(deltaTime) {
     splashTimerTwo -= deltaTime;
 
     context.drawImage(riddle1, 0, 0, canvas.width, canvas.height);
-    
+    musicBackground.stop();
+}
+function runGameWin(deltaTime) {
+    splashTimerTwo -= deltaTime;
+
+    context.drawImage(youWin, 0, 0, canvas.width, canvas.height);
     musicBackground.stop();
 }
 function cellAtPixelCoord(layer, x, y) {
@@ -444,6 +450,9 @@ function run() {
             break;
         case STATE_GAMEWIN:
             runGameWin(deltaTime);
+            break;
+        case STATE_GAMERIDDLE:
+            runGameRiddle(deltaTime);
             break;
     }
 

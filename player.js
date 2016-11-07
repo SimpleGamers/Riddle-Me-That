@@ -226,7 +226,19 @@ Player.prototype.update = function (deltaTime) {
         }
     }
     if (cellAtTileCoord(LAYER_OBJECT_TRIGGERS, tx, ty) == true) {
+        gameState = STATE_GAMERIDDLE;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_A) == true) {
+        gameState = STATE_GAMEOVER;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_B) == true) {
         gameState = STATE_GAMEWIN;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_C) == true) {
+        gameState = STATE_GAMEOVER;
+    }
+    if (keyboard.isKeyDown(keyboard.KEY_D) == true) {
+        gameState = STATE_GAMEOVER;
     }
 }
 
