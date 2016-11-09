@@ -135,9 +135,9 @@ function runSplash(deltaTime) {
 
     context.fillStyle = "#ffffff";
     context.font = "italic 24px Arial";
-    context.fillText("Chuck Norris Returns ", 220, 240);
+    context.fillText("Riddle-Me-That ", 220, 240);
     context.fillText("by ", 290, 265);
-    context.fillText("Nicholas Bunce ", 220, 290);
+    context.fillText("Nicholas, Kobe Wilson, and Alexander von Guttner ", 40, 290);
 
 }
 
